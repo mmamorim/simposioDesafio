@@ -15,13 +15,13 @@ function playKeyboard(){
 	var keyboard = {
 
 			/* ~ */
-			192: 'C,-2',
+			192: 'Dó,-2',
 
 			/* 1 */
 			49: 'C#,-2',
 
 			/* 2 */
-			50: 'D,-2',
+			50: 'Ré,-2',
 
 			/* 3 */
 			51: 'D#,-2',
@@ -237,8 +237,15 @@ function playKeyboard(){
 
 				let s = getDispStr(n,i,reverseLookupText);
 
-				label.innerHTML = '<b class="keyLabel">' + s + '</b>' + '<br /><br />' + n.substr(0,1) +
-					'<span name="OCTAVE_LABEL" value="' + i + '">' + (__octave + parseInt(i)) + '</span>' + (n.substr(1,1)?n.substr(1,1):'');
+				var nomeNota = "";
+				if(n.substr(0,1) == "C") nomeNota = "DÓ";
+				if(n.substr(0,1) == "D") nomeNota = "RÉ";
+				if(n.substr(0,1) == "E") nomeNota = "MI";
+				if(n.substr(0,1) == "F") nomeNota = "FÁ";
+				if(n.substr(0,1) == "G") nomeNota = "SOL";
+				if(n.substr(0,1) == "A") nomeNota = "LÁ";
+				if(n.substr(0,1) == "B") nomeNota = "SI";
+				label.innerHTML = '<b class="keyLabel">' + s + '</b>' + '<br /><br />' + nomeNota + (n.substr(1,3)?n.substr(1,3):'');
 				thisKey.appendChild(label);
 				thisKey.setAttribute('ID', 'KEY_' + n + ',' + i);
 				thisKey.addEventListener(evtListener[0], (function(_temp) { return function() { fnPlayKeyboard({keyCode:_temp}); } })(reverseLookup[n + ',' + i]));
